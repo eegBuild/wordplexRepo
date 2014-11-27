@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+
+{% block the_game %}
+<div class = "center">
+<br><br><br><br><br><br><br>
+<form class="form-blue" action= '/saveform' method="POST">
+	<div class="title">
+		<h2>Enter Your Name</h2>
+	</div>
+	<div class="element-name">
+
+		<div class="item-cont"><input class="large" type="text" name="user_fname" placeholder="First Name" autofocus = 'true' required = "true"/><span class="icon-place"  ></span></div>
+		<div class='item-cot'><label  class='myerror' style = 'visibility:hidden'></label></div>
+		<div class="item-cont"><input class="large" type="text" name="user_sname" placeholder="Last Name"/  required = "true"><span class="icon-place" ></span></div>
+	</div>
+<div class="submit">
+<input id = 'name_form' type="submit" value="Submit"/>
+</div>
+</form>
+</div>
+
+{% endblock %}
