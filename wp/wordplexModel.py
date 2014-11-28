@@ -6,7 +6,7 @@ class Player:
         self.sname = "null"
         self.rank = "null"
         self.time = "null"
-        self.time_secs = "null"
+        self.time_secs = "13.00"
         self.date = "null"
         self.s_time = 0.0
         self.e_time = 0.0

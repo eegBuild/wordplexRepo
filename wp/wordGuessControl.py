@@ -24,9 +24,10 @@ def savePlayerName(fname,sname):
     player.fname = fname
     player.sname = sname
 
-#
+# Starts new game
 def begin_game():
     player.s_time = getTimeNow()
+    player.word_list = []
     out = getRandomWord()
     out = out.rstrip('\r\n')
     player.word = out
@@ -38,7 +39,7 @@ def saveGame():
     player.time_secs = str(player.e_time - player.s_time)
     player.time = getStrTimeDiff(player.s_time,player.e_time)
     appendXml(player)
-    out = states = {
+    out ={
     'fname': player.fname,
     'rank': player.rank,
     'time': player.time}
@@ -52,31 +53,28 @@ def getTimeNow():
 
 # Returns a string of time elapsed between two times in seconds
 def getStrTimeDiff(start, end):
-    mins = " Minute"
+    mins = " Min"
     diff = end - start
     
     mint = int(diff/60) % 60
     sec = float("{0:.2f}".format(diff % 60))
     if mint != 1:
-        mins = "Minutes"
+        mins = "Mins"
     if mint < 1:
-        return "{} Seconds".format(sec)
+        return "{} Secs".format(sec)
     if mint >= 1:
-        return "{} {} and {} seconds".format(mint,mins,sec)
+        return "{} {} and {} Secs".format(mint,mins,sec)
 
 #Returns a string of randomly picked word from a file of words
 def getRandomWord():
     fobj = open("static\Files\sevenWords.txt","r")
     lineCount = sum(1 for _ in fobj)
     randnum = random.randint(0,lineCount-1)
-    #json format
     word = open("static\Files\sevenWords.txt","r").readlines()[randnum]
-    #word = '{\"data\": \"%s\"}' % open("static\Files\sevenWords.txt","r").readlines()[randnum]
-    #word = word.replace("\n","")
     return word
 
 def checkWords(word_list):
-    check = isListMatch(word_list,"static\\Files\\testWords.txt")
+    check = isListMatch(word_list,"static\Files\testWords.txt")
     if check != "xtruex":
         return check
     return check
@@ -98,6 +96,9 @@ def isWordMatch(wordin, filein):
 # checkInputWord((wordIn[string], filepath[string])
 def checkInputWord(wordIn, filein):
     wordIn.lower()
+    wordIn.replace(" ", "")
+    wordIn.replace("\n","")
+    wordIn.replace("\t","")
     fobj = open(filein,"r")
     message = "x"
     player.word_list.append(wordIn)
@@ -213,10 +214,8 @@ def getHighScores(filein):
 ##player.word_list.append("super")
 ##player.word_list.append("man")
 ##player.word_list.append("ram")
-##out = checkInputWord("supper", "static\\Files\\testWords.txt")
-##print(out)
-##if len(player.word_list) > 0:
-##    for w in player.word_list:
-##        print(w)
+##player.s_time = getTimeNow()
+##out = saveGame()
+##print(str(out))
 
    

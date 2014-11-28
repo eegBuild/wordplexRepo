@@ -9,7 +9,7 @@ function preGame(divIn, objIn)
 {
 	var word = objIn.data;
 	$(divIn).empty();
-	var out = ("<form id = 'view' class='form-blue'>\
+	var out = ("<form id = 'view' class='form-blue' action='/winner' method='POST'>\
 		<div class='title'>\
 			<h2>The Word is <span style = 'color:#000; font-size: 1.25em;'>"+word+"</h2>\
 		</div>\
@@ -30,7 +30,7 @@ function preGame(divIn, objIn)
 			<div class='item-cot'><label id = 'error7' class='myerror' value = '' style = 'visibility:hidden'></label></div>\
 			</div>\
 		<div class='submit'>\
-			<input id = 'winner_form_submit' type='submit' value='Submit'/>\
+			<input id = 'winner_form_submit' type='button' value='Submit'/>\
 		</div>\
 	</form>");
 
@@ -47,20 +47,25 @@ function preGame(divIn, objIn)
 			$.ajax({
 				url: '/winner',
 				type: 'POST',
+				dataType : 'text',
 				success: function(response) 
 				{
-					setWinnerForm('#view', response);
+					var obj = $.parseJSON(response);
+					alert(obj.fname);
+					setWinnerForm('#view', obj);
 				},
 				error: function(error) 
 				{
-					alert('Submiting Winner'+Error);
+					alert(error+"Error");
+					preGame('#gameform', "TheWord");
+					//$('#result').append(error);
 				}
 			});
 		}
 
 	});
 
-	
+
 	 $( ".large" ).each(function( index, element ) {
 		// element == this
 		$(this).focusout(function(){
@@ -124,7 +129,7 @@ function checkForm(divIn, secDivIn)
 				out = false;
 			}
 	});
-	
+/*	
 	$(secDivIn).each(function( index, element ) {
 	alert($(this).css('visibility')+" "+index);
 		if( $(this).css() == "visible" )
@@ -133,31 +138,39 @@ function checkForm(divIn, secDivIn)
 				alert(out);
 			}
 	});
-	
+*/	
 	return out;
 }
 
 function setWinnerForm(divIn, objIn)
 {
+	var name = objIn.fname;
+	var rank = objIn.rank;
+	var time = objIn.time;
 	$(divIn).empty();
-	var out = ("<form id = 'view' class='form-blue'>\
+	var out = ("<form id = 'view' class='form-blue' action='/score' method='POST'>\
 		<div class='title'>\
-			<h2>Well Done"+objIn.fname+" you are a Winner!<span style = 'color:#000; font-size: 1.25em;'></h2>\
+			<h2>Well Done "+name+"<span style = 'color:#000; font-size: 1.25em;'></h2>\
 		</div>\
 		    <div class='item-cont'>\
-			<textarea class='medium' placeholder='Text Area' rows='5' cols='20' name='textarea'>asdfsad</textarea>\
+			<textarea class='medium' placeholder='Text Area' rows='5' cols='20' name='textarea'>Your Time Was: "+time+ "&#13;&#10;Your Rank is: "+rank+ "&#13;&#10;Find your Rank and Time in the High Scores Hall of Fame.&#13;&#10;Please Play Again.</textarea>\
 			<span class='icon-place'></span>\
 			</div>\
 		</div>\
 		<div class='submit'>\
-			<input id = 'game_form_submit' type='button' value='Submit'/>\
+			<input id = 'score_form_submit' type='button' value='Play Again'/>\
 		</div>\
 	</form>");
 	
 	$(divIn).append(out);
+	
+		$( "#score_form_submit" ).click(function() {
+			location.reload();
+		});
 }
 function setScoreTable(divIn, objIn)
 {
+	var rank = 1;
 	$(divIn).empty();
 	var out = ("\
 		<div id='tableBody' class ='datagrid' value = '"+$(divIn).val()+"'>\
@@ -176,7 +189,7 @@ function setScoreTable(divIn, objIn)
 			  </tr>\
 			</thead>\
 			</table>\
-			<div style='overflow-y:scroll; overflow-x:hidden; max-height:400px; width:auto;'>\
+			<div style='overflow-y:scroll; overflow-x:hidden;  max-height:400px; width:auto;'>\
 			<table table id = 'tableScore'>\
 			<tbody>");
 			
@@ -185,12 +198,13 @@ function setScoreTable(divIn, objIn)
 	
 		out +=("\
 			  <tr>\
-			  <td class = 'wrap'>" + objIn.players[i].rank + "</td>\
+			  <td class = 'wrap'>" +rank  + "</td>\
 			  <td class = 'titleBlue' >" + objIn.players[i].fname + " " + objIn.players[i].sname + "</td>\
 			  <td class = 'wrap'>" + objIn.players[i].time + "</td>\
 			  <td class = 'titleBlue' >" + objIn.players[i].date + "</td>\
 			  </tr>\
 			 ");
+			 rank++;
 	}
 	
 	out += ("</tbody>\

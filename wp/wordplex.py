@@ -16,11 +16,13 @@ def display_index():
 
 @app.route('/saveform', methods=["POST"])
 def savename():
-    #t = Thread(target=update_log, args=(request.form['user_fname'], request.form['user_sname']))
+    #t = Thread(target=savePlayerName(user_fname,user_sname))
     #t.start()
     user_fname = request.form['user_fname']
     user_sname = request.form['user_sname']
-    savePlayerName(user_fname,user_sname)
+    t = Thread(target=savePlayerName(user_fname,user_sname))
+    t.start()
+    #savePlayerName(user_fname,user_sname)
     full_name = user_fname+' '+user_sname                          
     #session['last_visitor'] = full_name
     return render_template("game.html",
@@ -52,16 +54,21 @@ def start_game():
     random_word = begin_game()
     return random_word
 
-@app.route('/winner', methods = ['POST', 'GET])
+@app.route('/winner', methods = ['POST'])
 def record_winner():
     winner = saveGame()
     return jsonify(winner)
+
+@app.route('/score',  methods = ['POST'])
+def replay_game():
+    return render_template("game.html",
+                            the_title="Game Page",)
     
 @app.route('/getxmldata', methods = ['POST'])
 def getmyxml():
     return xmlTojson()
 
-#app.config['SECRET_KEY'] = 'thisismysecretkeywhichyouwillneverguesshahahahahahahaha'
+app.config['SECRET_KEY'] = 'thisismysecretkeywhichyouwillneverguesshahahahahahahaha'
 if __name__ == '__main__':
     app.run(port=5001, debug=True)
 

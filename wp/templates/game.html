@@ -69,6 +69,7 @@ jQuery(document).ready(function () {
 			dataType : 'text',
             success: function(response) 
 			{
+				alert(response);
 				var obj = $.parseJSON(response);
 				preGame('#gameform', obj);
             },

@@ -1,5 +1,6 @@
 <highscore>
-	<player id="1">
+<players>
+<player id="1">
 		<fname>Chuck</fname>
 		<sname>Norris</sname>
 		<rank>1</rank>
@@ -23,7 +24,26 @@
 		<time_secs>12.98</time_secs>
 		<date_set>25-12-2013</date_set>
 	</player>
-	<player id="6">
+	<player><fname>Richie</fname><sname>Rich</sname><rank>null</rank><time>23.78 Secs</time><time_secs>23.780386924743652</time_secs><date_set>27-11-2014</date_set></player>
+<player><fname>Richie</fname><sname>Rich</sname><rank>null</rank><time>24.43 Secs</time><time_secs>24.426414966583252</time_secs><date_set>27-11-2014</date_set></player>
+<player><fname>Richie</fname><sname>Rich</sname><rank>null</rank><time>24.44 Secs</time><time_secs>24.440582990646362</time_secs><date_set>27-11-2014</date_set></player>
+<player><fname>Richie</fname><sname>Rich</sname><rank>null</rank><time>25.53 Secs</time><time_secs>25.529391050338745</time_secs><date_set>27-11-2014</date_set></player>
+<player><fname>Richie</fname><sname>Rich</sname><rank>null</rank><time>40.94 Secs</time><time_secs>40.93746900558472</time_secs><date_set>27-11-2014</date_set></player>
+<player><fname>Richie</fname><sname>Rich</sname><rank>null</rank><time>46.42 Secs</time><time_secs>46.42208814620972</time_secs><date_set>27-11-2014</date_set></player>
+<player><fname>Tom</fname><sname>Thomas</sname><rank>null</rank><time>48.91 Secs</time><time_secs>48.90827202796936</time_secs><date_set>27-11-2014</date_set></player>
+<player><fname>rtyu</fname><sname>rytr</sname><rank>null</rank><time>52.93 Secs</time><time_secs>52.93402695655823</time_secs><date_set>27-11-2014</date_set></player>
+<player id="4">
+		<fname>Richard</fname>
+		<sname>Tapley</sname>
+		<rank>4</rank>
+		<time>56.21 Secs</time>
+		<time_secs>56.21321511268616</time_secs>
+		<date_set>22-11-2014</date_set>
+	</player>
+
+<player><fname>Richie</fname><sname>Rich</sname><rank>null</rank><time>1  Min and 31.3 Secs</time><time_secs>91.29630613327026</time_secs><date_set>27-11-2014</date_set></player>
+<player><fname>Sean</fname><sname>Moran</sname><rank>null</rank><time>2 Mins and 2.9 Secs</time><time_secs>122.89650797843933</time_secs><date_set>27-11-2014</date_set></player>
+<player id="6">
 		<fname>Normal</fname>
 		<sname>Norman</sname>
 		<rank>6</rank>
@@ -79,12 +99,4 @@
 		<time_secs>2706.66</time_secs>
 		<date_set>06-06-2014</date_set>
 	</player>
-	<player id="4">
-		<fname>Richard</fname>
-		<sname>Tapley</sname>
-		<rank>4</rank>
-		<time>56.21 Seconds</time>
-		<time_secs>56.21321511268616</time_secs>
-		<date_set>22-11-2014</date_set>
-	</player>
-</highscore>
+	</players></highscore>

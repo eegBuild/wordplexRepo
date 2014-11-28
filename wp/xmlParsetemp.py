@@ -3,7 +3,7 @@ import xml.dom.minidom
 from io import StringIO
 import xml.etree.ElementTree as etree
 from xml.etree.ElementTree import Element
-from wordplexModel import Player
+import os
 
 
 
@@ -45,46 +45,46 @@ def appendXml(classIn):
     tree = etree.parse("static/Files/highScores.xml")
     root = tree.getroot()
     
-    x = tree.find('players')
 
-    #add new player tag to root<highscore>
-    pl = Element("player")
-                
-    #add new fname tag to parent<player>
-    # and give value from classIn
-    fname = Element("fname")
-    fname.text = classIn.fname
-    pl.append(fname)
-                
-    sname = Element("sname")
-    sname.text = classIn.sname
-    pl.append(sname)
-                
-    rank = Element("rank")
-    rank.text = classIn.rank
-    pl.append(rank)
-                
-    time = Element("time")
-    time.text = classIn.time
-    pl.append(time)
-                
-    time_secs = Element("time_secs")
-    time_secs.text = classIn.time_secs
-    pl.append(time_secs)
-                
-    date = Element("date_set")
-    date.text = classIn.date
-    pl.append(date)
-                
-    x.append(pl)
+    for x in tree.iterfind('players'):
+
+        #add new player tag to root<highscore>
+        pl = Element("player")
         
+        #add new fname tag to parent<player>
+        # and give value from classIn
+        fname = Element("fname")
+        fname.text = classIn.fname
+        pl.append(fname)
+        
+        sname = Element("sname")
+        sname.text = classIn.sname
+        pl.append(sname)
+        
+        rank = Element("rank")
+        rank.text = classIn.rank
+        pl.append(rank)
+        
+        time = Element("time")
+        time.text = classIn.time
+        pl.append(time)
+        
+        time_secs = Element("time_secs")
+        time_secs.text = classIn.time_secs
+        pl.append(time_secs)
+        
+        date = Element("date_set")
+        date.text = classIn.date
+        pl.append(date)
+        
+        x.append(pl)
+
     # Write new xml file to highscore.xml
-    tree.write("static/Files/highScores.xml")
-    sortXml()
+    tree.write("static/Files/highScoresxx.xml")
 
 def sortXml():
 
-    tree = etree.parse("static/Files/highScores.xml")
+    tree = etree.parse("static/Files/highScoresTest.xml")
     root = tree.getroot()
     # this element holds the player entries
     container = Element("players")
@@ -104,18 +104,18 @@ def sortXml():
     # insert the last item from each tuple
     container[:] = [item[-1] for item in sorted_x]
     
-    for x in tree.iterfind('players'):
-         root.remove(x)
-    root.append(container)
-
-    #update rank
+##    for x in tree.iterfind('players'):
+##         root.remove(x)
+##    root.append(container)
 
 
-    tree.write("static/Files/highScores.xml")
 
+    tree.write("static/Files/highScoresTestxx.xml")
 
 
 def getKey(item):
     return item[0]
+
+
 
 
